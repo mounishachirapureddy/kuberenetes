@@ -1,0 +1,16 @@
+-->open source container orchestration platform developed by google
+-->designed to automate deployment scaling and management of containerized applications across a cluster of nodes
+-->provides a consistent and reliable way to manage applications,regardless of whether they are running on-premises,in cloud or in hybrid environments
+=================================
+Microservices:
+-->software architecture pattern that software applictaions as a collection of small,independtly deployable services
+-->each microservice is designed to perform a specific function or business capability and communicates with other services over well-defined api's or protocols
+======================================
+
+Architecture of kuberenetes:
+-->master node/control plane:if we set up kuberenetes on cloud, master node is taken care by the cloud-provider(eks,aks,gke)
+   components-
+       -API server-API server is the component of kuberenetes control plane that exposes the kuberenetes API.API server is the frontend for the kuberentes control plane
+       -controller manager-that runs the controller processes
+       -scheduler-control plane component that watches for the newly created pods with no assigned nodes and selects a node for them to run on
+       -etcd-consistent and highly avaliable key value store used as kubernetes backing store for all cluster data
