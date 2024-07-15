@@ -19,4 +19,6 @@ Architecture of kuberenetes:
         -kubelet-an agent that runs on each node in a cluster.it makes sure that containers are running in a pod
                  the kubelet takes a set of PodSpecs that are provided through various mechanism and ensures that  the containers describe in those PodSpecs are running and healthy
                  doesnot manage containers which are not created by kuberenets
-        -kube-proxy-it is a network proxy
+        -kube-proxy-it is a network proxy that runs on each node in your cluster ,implementing part of kubernetes concept
+                 maintains network rules on nodes
+                 these network rules allow network communication to your pods from network sessions inside or outside of your cluster
