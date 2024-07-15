@@ -14,3 +14,9 @@ Architecture of kuberenetes:
        -controller manager-that runs the controller processes
        -scheduler-control plane component that watches for the newly created pods with no assigned nodes and selects a node for them to run on
        -etcd-consistent and highly avaliable key value store used as kubernetes backing store for all cluster data
+-->worker node:
+   components
+        -kubelet-an agent that runs on each node in a cluster.it makes sure that containers are running in a pod
+                 the kubelet takes a set of PodSpecs that are provided through various mechanism and ensures that  the containers describe in those PodSpecs are running and healthy
+                 doesnot manage containers which are not created by kuberenets
+        -kube-proxy-it is a network proxy
