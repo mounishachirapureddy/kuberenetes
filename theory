@@ -22,3 +22,23 @@ Architecture of kuberenetes:
         -kube-proxy-it is a network proxy that runs on each node in your cluster ,implementing part of kubernetes concept
                  maintains network rules on nodes
                  these network rules allow network communication to your pods from network sessions inside or outside of your cluster
+===============================================
+workload components-
+-->pods-
+-1 main container others all are helper/sidecar container
+-smallest and most basic unit of deployment
+-represents the single instance of running process within the cluster
+-a pod encapsulates one or more containers,storage resources,network configurations  and other options required to run a specific set of containers together
+-pods are typically created and managed using higher-level abstractions such as deployments,replicasets or statefulsets which provides additional features like scaling,rolling updates and self-healing capabilities
+-pods provide several benefits including resource isolation, flexible deployment strategies,easy scaling and enhanced reliabilities
+-->deployments:
+-is an obj that provides declarative updates and management for a set of replica pods
+-when you create a deployment you specify the desired state by defining the container images,number of replicas and other configuration parameters
+-kuberenetes then ensures the actual state matches with desired state
+-if there are any descrepancies, kubernetes automatically takes action to recoincile the state, creating and deleting pods as necessary.
+-->replicasets:
+-in kuberenets,replicaset is an object that ensures a specified number of rerplica pods are running at any given time 
+-it is responsible for maintaining the desired replica count and managing the lifecycle of pods
+-replicasets are typically used to manage stateless applications where individual instances of application can be treated as interchangeables
+-they help in achieving high avaliability and scalability by automatically scaling the number of replicas up or down based on the defined specifications
+-when you create a replicasset you specify the desired number of replicas and provide a templpate for creating  pods
