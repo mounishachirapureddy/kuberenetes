@@ -42,3 +42,6 @@ workload components-
 -replicasets are typically used to manage stateless applications where individual instances of application can be treated as interchangeables
 -they help in achieving high avaliability and scalability by automatically scaling the number of replicas up or down based on the defined specifications
 -when you create a replicasset you specify the desired number of replicas and provide a templpate for creating  pods
+-->services-
+is an abstarction that provides a consistent way  to access and communicate with set of pods
+it acts as a stable network endpoint for accessing the pods ,enabling the interpod communication and loadbalancing
