@@ -45,3 +45,19 @@ workload components-
 -->services-
 is an abstarction that provides a consistent way  to access and communicate with set of pods
 it acts as a stable network endpoint for accessing the pods ,enabling the interpod communication and loadbalancing
+--------->clusterip-the default service type which exposes the service on a cluster-internal ip address.it is accessible only within the cluster
+--------->nodeport-exposes the service on the specific port on each node on the cluster .the service is accessible using the cluster node ip addresses(used only for testing purpose)
+--------->loadbalancer-provison a cloud providers load balancer to distribute the traffic to the service.External clients can access the service using a publicly accessble ip address(layer 4--one website under one loadbalancer)
+--------->externalname-maps the service name to the dns name allowing the service to redirect request  to an external endpoint outside the cluster
+-->ingress-
+is an API object that provides external access to the services within the cluster
+is an API object that defines rules for routing external HTTP nad HTTPS traffic to services within cluster
+it acts as layer 7-->(layer -7 means we can number of websites under one loadbalancer)(application load balancer), allowing external traffic to be routed to different services based on HTTP/HTTPS routed and rules 
+it acts as layer 7(application load balancer) allows for more advanced traffic routing and configurations compared to basic service and nodeport approaches
+using ingress resources,you can define complexrouting rules,manage multiple backend services and customize the behaviour of incoming traffic for your applications in kuberenetes
+the ingress controller will handle the implementation and enforcement  of these rules allowing the external traffic to be efficiently and securly routed to appropriate services within the cluster 
+ingress controller-
+manages and operates the ingress resource
+it is responsible for fulfilling the ingress rules by configuring and managing the underlying loadbalancer or reverse proxy tht handels the incoming traffic 
+by using the ingress controller ,kubernetes cluster can leverage the ingress resource to manage the external access to services in a more centralized and flexible manner
+the ingress controller abstracts the complexities of loadbalancing and routing ,providing a convienient interface to define and mange the ingress riules for applications running in acluster
