@@ -104,4 +104,39 @@ NAMESPACE SCOPES-
 -kubepublic namespace is pub;licly readble
 and contains cluster -wide resources
 -kube-node lease namespace is used by kuberenetes nodes to communicate their lease status 
+===================================================================================
+PERSISTANT VOLUMES
+-is a piece of storage provisoned in a cluster that can be dynamically allocated and managed by the adminstrators
+-PVs provide a way to decouple storage from the lifecycle of pods and allow the data to persistbeyond the lifetime of individual pods
+-they serve as an abstraction layer between the physical storage (such as network attached storage or local storage) and the application's need for storage
+-they enable applications to request storage resources without needing the details of underlying infrastructure.
+keypoints-
+--provisioning
+-PVs can provisioned statically or dynamically 
+-static provisioning including creating PVs in advance while dynamic provisioning allows PV s to be created on demand when requested by the application
+
+--storage classes
+-dynamic provisioning of PVs is facilitated though the use storage classes
+-storage classes defines different classes of storage with specific characterstics (eg:performance and access modes)and specify the provisioner responsible for dynamically creating storage 
+
+--accessmodes
+-PVs support different access modesto cater to different types of storage requirements
+-the common  access modes are ReadWriteOnce(RWO) for single node readwrite access,ReadOnlyMany(ROX)for  multiple nodes read only access and ReadWriteMany(RWX) for multiple nodes read-write access
+
+--lifecycle and reclaim poilcy
+-PVs have a lifecycle independent of pods that use them
+-they can be managed seperately from pods
+-when Pv is no longer needed it can be released and made avaliable for reuse 
+-the reclaim policy determines what happens to storage when pv is released allowing opotions like retaining data,deleting the data,or manual reclaimation
+
+persistent volume claims (PVCs)
+-are used by the applications to request storage from PVs
+-PVCs defines the desired characterstics of the storage such as size ,access mode and storage class
+-when pVC is created kuberenetes dynamically binds it to an avaliable PV that matches the requirements of specified in the claim
+-3 DIFFERENT CLAIM POILICIES that determines whta happens to assosicated Pv when PVC  is deleted or no longer needed
+--retain-the PV assosciated with PVC is not automatically deleted or released when PVC is deleted .Instead PV is retained and its content is preserved
+--delete-assosciated PV is automatically deleted when PVC is deleted
+--recycle-deprecated
+===========================================================================
+
 
