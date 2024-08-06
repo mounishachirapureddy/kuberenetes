@@ -137,35 +137,36 @@ persistent volume claims (PVCs)
 --retain-the PV assosciated with PVC is not automatically deleted or released when PVC is deleted .Instead PV is retained and its content is preserved
 --delete-assosciated PV is automatically deleted when PVC is deleted
 --recycle-deprecated
-=======================================================
-STATEFULSETS
--workload API object used to manage stateful applications
-unlike traditional deployment of stateless application ,stateful application require stableand unique network identities ,stable storage  and ordered and predicatble deploymemt and scaling
-Statefulsets are commmonly used for deploying and managing stateful applications such as databases (eg:MysSQL)and messaging service(eg:kafka)and other applications that require stable network identities and persistent storage 
-FEATURES
-STABLE NETWORK IDENTITIES-each pod in statefulset is assigned a unique and stablehostname based on the naming convention.this allows the stateful applictaions to have consistent network identity even when they are scaled up and down
-ORDERED DEPLOYMENT AND SCALING-statefulsets ensures that pods adeployed and scaled in a sequential and orderly manner.each pod is  created and fully running before the next pod is started ,ensuring dependencies and sequencing requirements are maintained
-STABLE STORAGE-statefulsets provide stable and unique storage volumes for each pod.PV and PVC are used to provide storage to podsallowing data to be persisited and reatined accross pods restarts and rescheduling.
-HEADLESS SERVICE-statefulsets automatically creates headless service which allows each pods to have its own DNS entry.this enables direct communication between pods using their unique hostnames
-STATEFUL POD SCALING-statefulset suppport both horizontal and vertical pod scaling vertical scaling involves chaning the resources (cpu and memory) allocated to each pod and horizontal scaling involves adding or removing pods from the stateful set
-ORDERED TERMINATION-when scaling down or terminating pods in a statefulset,kuberentes ensures that the pods are terminated in the reverse order of creation .this allows for the orderly application shutdown and ensures data integrity and consistency
-
 ===========================================================================
-HORIZONTAL POD SCALER
--HPA automatically adjust the number of replicas of deployment ,replicaset or statefulset,based on observed CPU utlization or custom metrics
--it ensures that there are enough replicas to handle the incoming traffic and prevent the overloading of the cluster
--when CPU or custom  metrics  exceeded the defined threshholds HPA scales up the replicas and when the metridcs decreases it scales down the replicas
-==================================================================
-CLUSTER AUTOSCALER
--Ii adjusts the size of kuberenetes cluster by adding and removing nodes based on the resource demands of the pods 
--It ensures that there are enough resources avaliable in the cluster to accomodate the scheduled pods
-=====================================\
-LIMITRANGE-
--Are used to specify the constraints on the resource requests and limits for pods in a namespace
--they help prevent pods from using excessive resouces or ensure that all pods have minimum resource guarantee
-=================================
-RESOURCEQUOTA-
-Are used to limit the total amount of the compute resources(CPU AND MEMORY)that can be used within the namespace
--they help to control the resource consumption of all pods and containers within that namespace
+STATEFULSETS-
+-statefulsets in kuberenetes are workload API objects used to  manage stateful applications
+-unlike the traditional deployment of stateless applications, stateful applications require unique network identities(means the pods have specific names unlike in stateless application as they are named with ip address it constantly changes),stable storage(compulsory volume is added)
+and ordered and predicted deployment ans scaling
+-they are commonly used for deploying and managing stateful applications such as databases (eg:MYsql),messaging systems(eg:kafka) and other appllications that require stable network identities and persistent storage
+features--
+-Stablenetwork identities--each pod in statefulsets is assigned a unique and stable hostname based on defined naming convention.this allows stateful applications to have consistent network identity even when they are scaled up and down
+-Ordered deployment and scaling-statefulsets ensures that pods are deployed and scaled in a sequential and ordered mannner.each pod is created and fully running before the next pod started ,ensuring dependencies and sequencing requirements are maintained
+-stable storage-statefulsets provide stable and unique storage volumews for each pod PV and PVC  are used to provide storage to pods,allowing data to be persisted and retained across pod restarts and rescheduling 
+-Headless service--statefulsets automatically creates a headless service,which allows each pod to have its own DNS entry.This enables direct communication between pods using their unique hostnames
+-stateful pod scaling- statefulsets supports both vaertical and horizontal scaling.vertical scaling involves changing resources (CPU resources and memory) allocated to each pod while horizontal scalijng involves adding or removing pods from stateful sets
+-order termination-when scaling down or terminating pods in statefulsets kuberenetes ensures that pods are terminated in thereverse order of their creation .this allows for orderly application shutdown and ensures data integrity and consistency.
+DATA REPLICATION-
+since each pod in statefulset has its own PV and PVC data replication can be handeled at storage level 
+Many cloud-based storage solutions like google cloud persistent disk(GCP PD) or amazon elastic block store(EBS) provide data replication capabilities to ensure high avaliability and data integrity
+============================================================================================
+DEAMONSETS-
+they are type of controller used to ensure that a copy of a specified pod is runnning on all or some of the nodes in a cluster 
+-unlike replicasets or deployments that maintain desired number of replicas accross the cluster.deamonsets are designed to run exactly one instance of a pod on each node
+-daemonset are commonly used to run system services or monitor agents on each node,ensuring that these essential services are present and active throughout the cluster 
+===============================================
+JOBS-
+- in kuberenetes ,job is controller object that creates one or more pods to perform specific task and ensures that thye task is completed successfully
+-unlike other controller objects like deployments and replicasets which maintain a specified number of replicas running at all times ,a job is designed for short-livedtask or batch-processing
+-jobs are designed to run one or more pods to perform a task and then terminate when the task is completed.they are ideal for running batch jobs or tasks that need to be executed once
+==============================================
+HORIZONTAL POD SCALER-
+-automatically adjusts the number of replicas of a deployments ,replicaset or statefulsetsbased on observed CPU utilsation or custom metrics
+it ensures that there are enough replicas to handle incoming traffic and prevent overloading the cluster
+when CPU or custom metrics exceeded the definned thresholds ,HPA scales u the 
 
 
