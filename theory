@@ -137,6 +137,35 @@ persistent volume claims (PVCs)
 --retain-the PV assosciated with PVC is not automatically deleted or released when PVC is deleted .Instead PV is retained and its content is preserved
 --delete-assosciated PV is automatically deleted when PVC is deleted
 --recycle-deprecated
+=======================================================
+STATEFULSETS
+-workload API object used to manage stateful applications
+unlike traditional deployment of stateless application ,stateful application require stableand unique network identities ,stable storage  and ordered and predicatble deploymemt and scaling
+Statefulsets are commmonly used for deploying and managing stateful applications such as databases (eg:MysSQL)and messaging service(eg:kafka)and other applications that require stable network identities and persistent storage 
+FEATURES
+STABLE NETWORK IDENTITIES-each pod in statefulset is assigned a unique and stablehostname based on the naming convention.this allows the stateful applictaions to have consistent network identity even when they are scaled up and down
+ORDERED DEPLOYMENT AND SCALING-statefulsets ensures that pods adeployed and scaled in a sequential and orderly manner.each pod is  created and fully running before the next pod is started ,ensuring dependencies and sequencing requirements are maintained
+STABLE STORAGE-statefulsets provide stable and unique storage volumes for each pod.PV and PVC are used to provide storage to podsallowing data to be persisited and reatined accross pods restarts and rescheduling.
+HEADLESS SERVICE-statefulsets automatically creates headless service which allows each pods to have its own DNS entry.this enables direct communication between pods using their unique hostnames
+STATEFUL POD SCALING-statefulset suppport both horizontal and vertical pod scaling vertical scaling involves chaning the resources (cpu and memory) allocated to each pod and horizontal scaling involves adding or removing pods from the stateful set
+ORDERED TERMINATION-when scaling down or terminating pods in a statefulset,kuberentes ensures that the pods are terminated in the reverse order of creation .this allows for the orderly application shutdown and ensures data integrity and consistency
+
 ===========================================================================
+HORIZONTAL POD SCALER
+-HPA automatically adjust the number of replicas of deployment ,replicaset or statefulset,based on observed CPU utlization or custom metrics
+-it ensures that there are enough replicas to handle the incoming traffic and prevent the overloading of the cluster
+-when CPU or custom  metrics  exceeded the defined threshholds HPA scales up the replicas and when the metridcs decreases it scales down the replicas
+==================================================================
+CLUSTER AUTOSCALER
+-Ii adjusts the size of kuberenetes cluster by adding and removing nodes based on the resource demands of the pods 
+-It ensures that there are enough resources avaliable in the cluster to accomodate the scheduled pods
+=====================================\
+LIMITRANGE-
+-Are used to specify the constraints on the resource requests and limits for pods in a namespace
+-they help prevent pods from using excessive resouces or ensure that all pods have minimum resource guarantee
+=================================
+RESOURCEQUOTA-
+Are used to limit the total amount of the compute resources(CPU AND MEMORY)that can be used within the namespace
+-they help to control the resource consumption of all pods and containers within that namespace
 
 
